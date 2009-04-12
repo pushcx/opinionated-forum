@@ -32,7 +32,6 @@ There are two kinds of topics:
  - create logged_in?, admin?, is_current_user? view helpers
  - replace last of erb with haml
  - Mark some tags as usable only by admins
- - Remove UsersController#destroy, #new
  - Admin: option to split topics
  - Only admins and users themselves should be able to edit a user's profile
  - Only admins should have the Admin checkbox on profile editing
