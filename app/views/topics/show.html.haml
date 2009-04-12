@@ -2,13 +2,13 @@
   %h1#title=h @topic.title
 
   - if @current_user
-    = javascript_tag do
-      == new Ajax.InPlaceEditor('title', '#{update_title_of_topic_path(@topic)}', { highlightendcolor: "#e5e5e5"});
+    :javascript
+      new Ajax.InPlaceEditor('title', '#{update_title_of_topic_path(@topic)}', { highlightendcolor: "#e5e5e5"});
 
   #taglist
     %h2 Tags
     %ul
-      - @topic.tags.each do |tag| 
+      - @topic.tags.each do |tag|
         %li{ :id => "tag-#{tag.name.gsub(/\s/, "-")}" }
           = link_to_remote "[x]", :url => untag_topic_path(@topic, :tag => tag.name) if @current_user
           = link_to tag.name, tag
@@ -22,12 +22,12 @@
       Who's talking?
       %small (by time last seen)
     = posters(@topic.posts)
-  
+
   - if @current_user and @current_user.admin?
     #admin
       %h2 Administrative
       %p Split topic with checked messages.
-    
+
 #posts
   - prevpost = nil
   - @topic.posts.each do |post|
@@ -38,7 +38,7 @@
         =h(shorten_username(post.user.name)) unless user_continuation
         /- if post.body.length > 100
         /  %img{ :src => "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(post.user.email.downcase)}?s=30" }
-          
+
       .mark<
         = check_box :post, :check3
       .time<
@@ -46,7 +46,6 @@
       .body<
         = markdown(post.body)
     - prevpost = post unless user_continuation
-  
+
   = render :partial => 'posts/slowreply'  if @current_user
   = render :partial => 'posts/quickreply' if @current_user
-  
