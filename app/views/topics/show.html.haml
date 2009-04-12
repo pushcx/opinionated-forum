@@ -21,7 +21,11 @@
     %h2
       Who's talking?
       %small (by time last seen)
-    = posters(@topic.posts)
+    %ol
+      - posters_by_latest(@topic.posts).each do |user, time|
+        %li
+          = time.to_formatted_s(:short)
+          = link_to h(user.name), user
 
   - if @current_user and @current_user.admin?
     #admin

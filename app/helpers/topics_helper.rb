@@ -9,11 +9,8 @@ module TopicsHelper
     return "unread"
   end
   
-  def posters(posts)
-    h = Hash.new
-    posts.each { |post| h[post.user] = post.created_at }
-    posters = h.map.sort {|a,b| a[1] <=> b[1] }
-    posters.map {|user, time| time.to_formatted_s(:short) + " " + link_to(user.name, user) }.join(",<br/>")
+  def posters_by_latest(posts)
+    Hash[ *posts.collect { |p| [p.user, p.created_at] }.flatten ].sort_by { |user, at| at }
   end
   
 end
