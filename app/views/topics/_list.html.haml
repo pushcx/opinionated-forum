@@ -1,11 +1,11 @@
 - topics.each do |topic| 
   .topic{ :class => [cycle("even", "odd"), class_style_for_seen_topic(topic, @current_user)]}
-    %a.title{ :href => topic_path(topic) }= topic.title
+    %a.title{ :href => topic_path(topic) }= h(topic.title)
     %ul
       %li.tags
         = "Tags: "         + tags_for_topic(topic.tags)
       /%li.start
       /  = "Started by: "   + link_to(topic.posts.first.name, topic.posts.first)
       %li.last
-        = "Last post by: " + link_to(topic.posts.last.user.name,  topic.posts.last.user)
+        = "Last post by: " + link_to(h(topic.posts.last.user.name),  topic.posts.last.user)
         = " at "           + link_to(topic.posts.last.created_at.to_formatted_s(:short), topic_post_path(topic, topic.posts.last))

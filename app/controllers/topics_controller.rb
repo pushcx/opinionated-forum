@@ -1,10 +1,10 @@
 class TopicsController < ApplicationController
   before_filter :require_login, :except => [:index, :show]
   before_filter :mark_topic_read, :only => [:show]
-  
+
   caches_action :show
   cache_sweeper :post_sweeper, :only => [:update, :tag, :untag, :update_title_of]
-  
+
   # GET /topics
   # GET /topics.xml
   def index
@@ -22,7 +22,7 @@ class TopicsController < ApplicationController
   # GET /topics/1.xml
   def show
     @topic = Topic.find(params[:id])
-    
+
     # TODO This is an excellent candidate for a helper
     h = {}
     @topic.posts.each do |post|
@@ -105,11 +105,11 @@ class TopicsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   def tag
     @topic = Topic.find(params[:id])
     @topic.tag_list.add(params[:tag][:name].split(" "))
-    
+
     respond_to do |wants|
       if @topic.save
         flash[:notice] = "Tagged topic with #{params[:tag][:name]}."
@@ -122,7 +122,7 @@ class TopicsController < ApplicationController
       end
     end
   end
-  
+
   def untag
     @topic = Topic.find(params[:id])
     @topic.tag_list.remove(params[:tag])
@@ -140,20 +140,20 @@ class TopicsController < ApplicationController
       end
     end
   end
-  
+
   def update_title_of
     @topic = Topic.find(params[:id])
-    @topic.title = helpers.sanitize(params[:value])
+    @topic.title = params[:value]
     if @topic.save
-      render :text => @topic.title
+      render :text => h(@topic.title)
     end
   end
-  
+
   def mark_all_read
     @current_user.mark_all_topics_read
     redirect_to(topics_path)
   end
-  
+
   private
     def mark_topic_read
       Topic.find(params[:id]).read_by(@current_user) if @current_user

@@ -1,6 +1,6 @@
 - content_for :feeds do 
-  %link{ "rel"=>"alternate", "type"=>"application/rss+xml", "title"=>"Topics tagged with 'test'", "href"=>formatted_tag_url(@tag, :format => :rss) }
+  %link{ "rel"=>"alternate", "type"=>"application/rss+xml", "title"=>"Topics tagged with '#{h @tag.name}'", "href"=>formatted_tag_url(@tag, :format => :rss) }
 
 #topics
-  %h1== Topics tagged with &ldquo;#{@tag.name}&rdquo;
+  %h1== Topics tagged with &ldquo;#{h @tag.name}&rdquo;
   = render :partial => "topics/list", :locals => {:topics => @topics}

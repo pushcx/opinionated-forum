@@ -1,9 +1,10 @@
 #users
   - @users.each do |user| 
     .user{ :class => cycle("even", "odd"), :style => "background-image: url('#{gravatar_url_for(user, 30)}'); background-position: center right; background-repeat: no-repeat"}
-      %a.name{ :href => user_path(user) }= user.name
+      %a.name{ :href => user_path(user) }= h(user.name)
       %ul
+        - if user.admin?
+          %li.admin
+            %em Administrator
         %li.email
-          = "Email: "        + (user.email || "no")
-        %li.admin
-          = "Admin: "        + (user.admin? ? "Yes" : "No")
+          = user.email.blank? ? "No e-mail address given" : "Send private message"

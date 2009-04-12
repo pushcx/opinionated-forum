@@ -7,7 +7,7 @@
   .tagcloud
     %h2 Tags
     - tag_cloud @tags, %w(css1 css2 css3 css4) do |tag, css_class| 
-      = link_to tag.name, tag, :class => css_class
+      = link_to h(tag.name), tag, :class => css_class
 
 #topics
   = render :partial => "new"
