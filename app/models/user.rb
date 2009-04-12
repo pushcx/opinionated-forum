@@ -6,7 +6,7 @@
   before_validation :sanitize_fields
   validates_presence_of :openid_url
   validates_presence_of :name
-#  validates_presence_of :email
+  validates_uniqueness_of :name, :case_sensitive => false
   
   def mark_all_topics_read
     # set the time marker
@@ -17,9 +17,10 @@
   end
   
   private
-    def sanitize_fields
-      self.name  = helpers.sanitize(name)
-      self.email = helpers.sanitize(email)
-    end
+
+  def sanitize_fields
+    self.name  = helpers.sanitize(name)
+    self.email = helpers.sanitize(email)
+  end
   
 end
