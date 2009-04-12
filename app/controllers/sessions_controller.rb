@@ -7,13 +7,13 @@ class SessionsController < ApplicationController
   def new
     # login page
   end
-  
+
   def create
-    if params[:skip_openid] and Rails.env.development?
+    if params[:skip_openid] and SKIP_OPENID_VERIFICATION
       session[:user_openid_url] = params[:openid_url]
       redirect_to root_path and return
     end
-    
+
     begin
       identifier = params[:openid_url]
       identifier = 'http://' + identifier unless identifier =~ /^https?:\/\//
@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
     end
     return_to = create_finalize_session_url
     realm = session_url
-    
+
     if oidreq.send_redirect?(realm, return_to, params[:immediate])
       redirect_to oidreq.redirect_url(realm, return_to, params[:immediate])
     else
@@ -61,7 +61,7 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
-  
+
   def destroy
     session[:user_openid_url] = nil
     redirect_to root_path
@@ -76,5 +76,5 @@ class SessionsController < ApplicationController
     end
     return @consumer
   end
-  
+
 end

@@ -6,7 +6,7 @@
   - form_tag session_path, :method => :post do
     = label_tag :openid_url, "Your OpenID:"
     = text_field_tag :openid_url, "http://", :style => "width: 100%; font-size: 1.8em; margin-bottom: 0.6em"
-    - if Rails.env.development?
+    - if SKIP_OPENID_VERIFICATION
       = label_tag(:skip_openid, "#{check_box_tag(:skip_openid)} Skip verification (only available in dev mode)", :style => "margin-bottom: 1em")
     %p{:style => "text-align: center"}= submit_tag 'Log me in', :style => "font-size: 1.6em"
 
