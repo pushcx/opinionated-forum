@@ -13,6 +13,8 @@ require File.join(File.dirname(__FILE__), 'boot')
 Rails::Initializer.run do |config|
   config.time_zone = 'UTC'
 
+  config.gem 'haml'
+
   config.action_controller.session = {
     :session_key => '_railsforum_session',
     :secret      => '995f633c380daf0f214455e78df1d02dff637b6860b42332db6af432d60992c74b2b764281111d860432c4c942d5aec208f83a694ebc43ab966c71dc9781e81e'
