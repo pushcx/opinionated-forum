@@ -31,6 +31,7 @@ class UsersController < ApplicationController
   # PUT /users/1.xml
   def update
     respond_to do |format|
+      @user.admin = params[:user][:admin] if @current_user.admin?
       if @user.update_attributes(params[:user])
         flash[:notice] = 'User was successfully updated.'
         format.html { redirect_to(@user) }

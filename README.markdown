@@ -21,7 +21,6 @@ This is a rails-based forum engine with some strong opinions:
 
 ## TODO
 
- - Only admins should have the Admin checkbox on profile editing
  - Give users a text box to add their own profile info
  - Remove 'quick' message mode, move posting inline
  - Replace Prototype with unobtrusive JavaScript (note TopicsController#new)
