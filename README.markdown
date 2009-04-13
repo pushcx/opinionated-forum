@@ -21,7 +21,6 @@ This is a rails-based forum engine with some strong opinions:
 
 ## TODO
 
- - Reserve topic title editing for original poster and admins
  - Only admins should have the Admin checkbox on profile editing
  - Give users a text box to add their own profile info
  - Remove 'quick' message mode, move posting inline

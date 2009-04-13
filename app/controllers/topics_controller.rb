@@ -1,9 +1,11 @@
 class TopicsController < ApplicationController
-  before_filter :require_login, :except => [:index, :show]
-  before_filter :mark_topic_read, :only => [:show]
+  before_filter :load_topic, :only => [ :show, :edit, :update_title_of, :destroy, :update_title_of ]
+  before_filter :require_login, :except => [ :index, :show ]
+  before_filter :only_creator_or_admin, :only => [ :update_title_of ]
+  before_filter :mark_topic_read, :only => [ :show ]
 
   caches_action :show
-  cache_sweeper :post_sweeper, :only => [:update, :tag, :untag, :update_title_of]
+  cache_sweeper :post_sweeper, :only => [ :tag, :untag, :update_title_of ]
 
   # GET /topics
   # GET /topics.xml
@@ -21,7 +23,6 @@ class TopicsController < ApplicationController
   # GET /topics/1
   # GET /topics/1.xml
   def show
-    @topic = Topic.find(params[:id])
     @showed_gravatar = false
 
     respond_to do |format|
@@ -40,11 +41,6 @@ class TopicsController < ApplicationController
       format.html # new.html.erb
       format.xml  { render :xml => @topic }
     end
-  end
-
-  # GET /topics/1/edit
-  def edit
-    @topic = Topic.find(params[:id])
   end
 
   # POST /topics
@@ -71,27 +67,9 @@ class TopicsController < ApplicationController
     end
   end
 
-  # PUT /topics/1
-  # PUT /topics/1.xml
-  def update
-    @topic = Topic.find(params[:id])
-
-    respond_to do |format|
-      if @topic.update_attributes(params[:topic])
-        flash[:notice] = 'Topic was successfully updated.'
-        format.html { redirect_to(@topic) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @topic.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
   # DELETE /topics/1
   # DELETE /topics/1.xml
   def destroy
-    @topic = Topic.find(params[:id])
     @topic.destroy
 
     respond_to do |format|
@@ -101,7 +79,6 @@ class TopicsController < ApplicationController
   end
 
   def tag
-    @topic = Topic.find(params[:id])
     @topic.tag_list.add(params[:tag][:name].split(" "))
 
     respond_to do |wants|
@@ -136,7 +113,6 @@ class TopicsController < ApplicationController
   end
 
   def update_title_of
-    @topic = Topic.find(params[:id])
     @topic.title = params[:value]
     if @topic.save
       render :text => h(@topic.title)
@@ -150,8 +126,18 @@ class TopicsController < ApplicationController
 
   private
 
+  def only_creator_or_admin
+    return true if @current_user == @topic.posters.first or @current_user.admin?
+    flash[:error] = "No editing other others' topics"
+    redirect_to :action => :show and return false
+  end
+
+  def load_topic
+    @topic = Topic.find(params[:id], :include => [:tags, :posts])
+  end
+
   def mark_topic_read
-    Topic.find(params[:id]).read_by(@current_user) if logged_in?
+    @topic.read_by(@current_user) if logged_in?
     true
   end
 

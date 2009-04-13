@@ -1,7 +1,7 @@
 #meta
   %h1#title=h @topic.title
 
-  - if logged_in?
+  - if logged_in? and (@current_user == @topic.posters.first or admin?)
     :javascript
       new Ajax.InPlaceEditor('title', '#{update_title_of_topic_path(@topic)}', { highlightendcolor: "#e5e5e5"});
 
