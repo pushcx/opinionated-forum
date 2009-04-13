@@ -1,6 +1,7 @@
 - topics.each do |topic| 
   .topic{ :class => [cycle("even", "odd"), class_style_for_seen_topic(topic, @current_user)]}
-    %a.title{ :href => topic_path(topic) }= h(topic.title)
+    %h2<
+      %a.title{ :href => topic_path(topic) }= h(topic.title)
     %ul
       %li.tags
         = "Tags: "         + tags_for_topic(topic.tags)
