@@ -5,16 +5,16 @@
       %p You can add some tags to your topic, which makes it easier for other users to see what kind of topic it is. Separate multiple tags with spaces.
 
     .fields
-      = f.label :title, "Title for your topic", :style => "font-weight: bold"
-      = f.text_field :title, :style => "font-size: 1.6em; width: 97%; margin-bottom: 0.5em"
+      = f.label :title, "Title for your topic", :class => 'required'
+      = f.text_field :title, :class => 'text required'
   
       = f.label :tag_list, "Optional: tags for this topic"
-      = f.text_field :tag_list, :style => "width: 97%; margin-bottom: 0.5em;"
+      = f.text_field :tag_list, :class => 'text'
   
       = label :post, :body, "Write a nice opening post for your topic"
-      = text_area :post, :body, :style => "width: 97%; height: 100px; margin-bottom: 1em"
+      = text_area :post, :body, :class => 'text'
 
-      %p{ :style => "margin-bottom: 0"}
+      %p.submit
         = f.submit "Start your topic"
         or
-        = link_to_function('cancel', "Effect.SlideUp('newtopic', { duration: 0.2 })", :style => "color: red")
+        = link_to_function('cancel', "Effect.SlideUp('newtopic', { duration: 0.2 })")

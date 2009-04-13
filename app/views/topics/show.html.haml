@@ -14,8 +14,8 @@
           = link_to h(tag.name), tag
     - if logged_in?
       - form_for(:tag, :url => tag_topic_path(@topic)) do |f|
-        = f.text_field :name, :style => "width: 142px"
-        = f.submit "add"
+        = f.text_field :name, :class => 'tag'
+        = f.submit "Add"
 
   #talking
     %h3
