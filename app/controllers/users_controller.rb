@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
-  
+  before_filter :load_user, :except => :index
+  before_filter :only_self_or_admin, :only => [ :edit, :update ]
+  before_filter :require_login, :only => [ :edit, :update ]
+
   # GET /users
   # GET /users.xml
   def index
@@ -14,41 +17,19 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show
-    @user = User.find(params[:id])
-
     respond_to do |format|
-      format.html { } 
+      format.html { }
       format.xml  { render :xml => @user }
     end
   end
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
-  end
-
-  # POST /users
-  # POST /users.xml
-  def create
-    @user = User.new(params[:user])
-
-    respond_to do |format|
-      if @user.save
-        flash[:notice] = 'User was successfully created.'
-        format.html { redirect_to(@user) }
-        format.xml  { render :xml => @user, :status => :created, :location => @user }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-      end
-    end
   end
 
   # PUT /users/1
   # PUT /users/1.xml
   def update
-    @user = User.find(params[:id])
-
     respond_to do |format|
       if @user.update_attributes(params[:user])
         flash[:notice] = 'User was successfully updated.'
@@ -59,5 +40,17 @@ class UsersController < ApplicationController
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end
+  end
+
+  private
+
+  def load_user
+    @user = User.find(params[:id])
+  end
+
+  def only_self_or_admin
+    return true if @current_user == @user or @current_user.admin?
+    flash[:error] = "No editing other users"
+    redirect_to :action => :show and return false
   end
 end

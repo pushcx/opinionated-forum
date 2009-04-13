@@ -22,4 +22,6 @@
           %li.right.login= link_to "Log In", login_path
 
     #content
+      .flash
+        = flash_messages
       = yield

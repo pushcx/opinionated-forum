@@ -1,5 +1,6 @@
 #meta
-  = link_to 'Edit', edit_user_path(@user) 
+  - if logged_in? and (is_current_user? @user or admin?)
+    = link_to 'Edit', edit_user_path(@user)
 
 #user
   %h1= h(@user.name)
