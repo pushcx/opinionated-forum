@@ -13,7 +13,7 @@
         %li{ :class => current?('topics') }= link_to "Topics", topics_path
         %li{ :class => current?('tags') }=   link_to "Tags", tags_path
         %li{ :class => current?('users') }=  link_to "Users", users_path
-        %li{ :class => current?('search') }= link_to "Search", "#notimplemented"
+        /%li{ :class => current?('search') }= link_to "Search", "#notimplemented"
 
         - if logged_in?
           %li.right.logout= link_to "Log Out", logout_path

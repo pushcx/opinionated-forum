@@ -15,30 +15,23 @@ This is a rails-based forum engine with some strong opinions:
  - Posts may be edited and old versions are kept.
  - Private messages are email
 
-## Topics
-
-There are two kinds of topics:
-
- - **Normal**: These topics always show their entire contents.
-    
- - **Continuous**: These topics are more like a chat room than like a forum topic. They show only the latest 30 or so messages, and provide you with a paginated archive when you really need the history.
-
 ## Install
 
  - Edit config/database.yml and run rake db:schema:load
 
 ## TODO
 
- - Mark some tags as usable only by admins
- - Admin: option to split topics
- - Only admins should have the Admin checkbox on profile editing
- - Reserve title editing for original poster and admins
- - Replace Prototype with unobtrusive JavaScript (note TopicsController#new)
- - Create Search page using Google Site Search
- - Give users a text box to add their own profile info
- - When switching message modes, preserve message
- - In large message mode, post/cancel buttons overlap right column
- - Set page <title> based on page contents
- - Expose post editing, acts_as_versioned the posts
  - integrate https://www.idselector.com/ on login
+ - Reserve topic title editing for original poster and admins
+ - Only admins should have the Admin checkbox on profile editing
+ - Give users a text box to add their own profile info
+ - Remove 'quick' message mode, move posting inline
+ - Replace Prototype with unobtrusive JavaScript (note TopicsController#new)
+ - Show add/remove of tags in message flow
+ - Expose post editing, acts_as_versioned the posts
  - private messaging via email
+ - Set page <title> based on page contents
+ - Feeds for new topics (all and by tag), new posts (all and by tag)
+ - Create Search page using Google Site Search
+ - Admin: option to split topics
+ - Mark some tags as usable only by admins
