@@ -38,10 +38,11 @@
     - user_continuation = (prevpost.user == post.user rescue false)
     %a{ :name => post.id }/
     .post
-      .user{ :title => h(post.user.name) }<
-        =h(shorten_username(post.user.name)) unless user_continuation
-        /- if post.body.length > 100
-        /  %img{ :src => "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(post.user.email.downcase)}?s=30" }
+      - unless user_continuation
+        .user{ :title => h(post.user.name) }
+          = h(shorten_username(post.user.name))
+          /- if post.body.length > 100
+          /  %img{ :src => "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(post.user.email.downcase)}?s=30" }
 
       .mark<
         = check_box :post, :check3
@@ -49,7 +50,7 @@
         = link_to(post.created_at.to_formatted_s(:short), topic_post_path(@topic, post))
       .body<
         = user_html(post.body)
-    - prevpost = post unless user_continuation
+    - prevpost = post
 
   - if logged_in?
     = render :partial => 'posts/slowreply'

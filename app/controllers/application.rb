@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
     true
   end
 
+  def logged_in?
+    @current_user
+  end
+
   def require_login
     logged_in?
   end
