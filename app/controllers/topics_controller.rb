@@ -23,13 +23,6 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
 
-    # TODO This is an excellent candidate for a helper
-    h = {}
-    @topic.posts.each do |post|
-      h[post.user] = post.created_at
-    end
-    @posters = h.map.sort(){|a,b| a[1] <=> b[1] }
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @topic }

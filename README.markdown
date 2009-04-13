@@ -29,7 +29,6 @@ There are two kinds of topics:
 
 ## TODO
 
- - do todo in TopicsController#show action
  - replace last of erb with haml
  - Mark some tags as usable only by admins
  - Admin: option to split topics
