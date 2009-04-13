@@ -44,10 +44,11 @@
           /- if post.body.length > 100
           /  %img{ :src => "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(post.user.email.downcase)}?s=30" }
 
-      .mark<
-        = check_box :post, :check3
+      - if admin?
+        .mark<
+          = check_box :post, :check3
       .time<
-        = link_to(post.created_at.to_formatted_s(:short), topic_post_path(@topic, post))
+        = link_to('&nbsp;' + post.created_at.to_formatted_s(:short).gsub(' ', '&nbsp;'), topic_post_path(@topic, post))
       .body<
         = user_html(post.body)
     - prevpost = post
