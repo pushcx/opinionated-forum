@@ -13,6 +13,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 Rails::Initializer.run do |config|
   config.time_zone = 'UTC'
 
+  config.gem 'gravtastic'
   config.gem 'haml'
   config.gem "sanitize"
 

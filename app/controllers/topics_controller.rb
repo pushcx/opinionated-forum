@@ -22,6 +22,7 @@ class TopicsController < ApplicationController
   # GET /topics/1.xml
   def show
     @topic = Topic.find(params[:id])
+    @showed_gravatar = false
 
     respond_to do |format|
       format.html # show.html.erb

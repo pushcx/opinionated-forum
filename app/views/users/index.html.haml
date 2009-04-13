@@ -1,10 +1,12 @@
 #users
-  - @users.each do |user| 
-    .user{ :class => cycle("even", "odd"), :style => "background-image: url('#{gravatar_url_for(user, 30)}'); background-position: center right; background-repeat: no-repeat"}
-      %a.name{ :href => user_path(user) }= h(user.name)
-      %ul
-        - if user.admin?
-          %li.admin
-            %em Administrator
-        %li.email
-          = user.email.blank? ? "No e-mail address given" : "Send private message"
+  %table
+    - @users.each do |user| 
+      %tr.user{ :class => cycle("even", "odd") }
+        %td
+          = link_to image_tag(user.gravatar_url, :alt => "#{h user.name} gravatar"), user_path(user)
+        %td
+          %a.name{ :href => user_path(user) }= h(user.name)
+          %p
+            - if user.admin?
+              %em Administrator
+            = user.email.blank? ? "No e-mail address given" : "Send private message"
