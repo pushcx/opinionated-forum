@@ -52,6 +52,7 @@ class SessionsController < ApplicationController
       flash[:notice] = ("Verification of #{oidresp.display_identifier}"\
                         " succeeded.")
       session[:user_openid_url] = oidresp.display_identifier
+      User.find_by_openid_url(session[:user_openid_url]).mark_all_read_if_possible
     when OpenID::Consumer::SETUP_NEEDED
       flash[:notice] = "Immediate request failed - Setup Needed"
     when OpenID::Consumer::CANCEL
@@ -63,6 +64,7 @@ class SessionsController < ApplicationController
 
 
   def destroy
+    User.find_by_openid_url(session[:user_openid_url]).mark_all_read_if_possible
     session[:user_openid_url] = nil
     redirect_to root_path
   end

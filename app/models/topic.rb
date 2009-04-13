@@ -19,5 +19,6 @@ class Topic < ActiveRecord::Base
     v = viewings.find_or_initialize_by_user_id(user.id)
     v.seen = Time.now.utc
     v.save
+    user.mark_all_read_if_possible
   end
 end

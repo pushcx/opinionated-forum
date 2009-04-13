@@ -16,4 +16,10 @@
     # and do some housekeeping
     viewings.clear
   end
+
+  def mark_all_read_if_possible
+    return unless viewings.count(:all, :conditions => ['seen <= ?', Time.now.utc]) == 0
+    mark_all_topics_read
+    save
+  end
 end
