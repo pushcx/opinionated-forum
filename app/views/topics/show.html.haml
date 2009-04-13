@@ -1,7 +1,7 @@
 #meta
   %h1#title=h @topic.title
 
-  - if @current_user
+  - if logged_in?
     :javascript
       new Ajax.InPlaceEditor('title', '#{update_title_of_topic_path(@topic)}', { highlightendcolor: "#e5e5e5"});
 
@@ -10,9 +10,9 @@
     %ul
       - @topic.tags.each do |tag|
         %li{ :id => "tag-#{tag.name.gsub(/\s/, "-")}" }
-          = link_to_remote "[x]", :url => untag_topic_path(@topic, :tag => tag.name) if @current_user
+          = link_to_remote "[x]", :url => untag_topic_path(@topic, :tag => tag.name) if logged_in?
           = link_to h(tag.name), tag
-    - if @current_user
+    - if logged_in?
       - form_for(:tag, :url => tag_topic_path(@topic)) do |f|
         = f.text_field :name, :style => "width: 142px"
         = f.submit "add"
@@ -27,7 +27,7 @@
           = time.to_formatted_s(:short)
           = link_to h(user.name), user
 
-  - if @current_user and @current_user.admin?
+  - if admin?
     #admin
       %h2 Administrative
       %p Split topic with checked messages.
@@ -51,5 +51,6 @@
         = user_html(post.body)
     - prevpost = post unless user_continuation
 
-  = render :partial => 'posts/slowreply'  if @current_user
-  = render :partial => 'posts/quickreply' if @current_user
+  - if logged_in?
+    = render :partial => 'posts/slowreply'
+    = render :partial => 'posts/quickreply'

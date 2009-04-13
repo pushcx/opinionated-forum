@@ -155,9 +155,10 @@ class TopicsController < ApplicationController
   end
 
   private
-    def mark_topic_read
-      Topic.find(params[:id]).read_by(@current_user) if @current_user
-      true
-    end
+
+  def mark_topic_read
+    Topic.find(params[:id]).read_by(@current_user) if logged_in?
+    true
+  end
 
 end

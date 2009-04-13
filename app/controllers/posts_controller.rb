@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-  
+  before_filter :require_login
   cache_sweeper :post_sweeper, :only => [:create, :update, :destroy]
-  
+
   # GET /topics/1/posts/1/edit
   def edit
     @post = Post.find(params[:id])
