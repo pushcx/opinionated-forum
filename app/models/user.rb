@@ -11,7 +11,7 @@
 
   def mark_all_topics_read
     # set the time marker
-    update_attribute(:all_read_upto, Time.now)
+    update_attribute(:all_read_upto, Time.now.utc)
 
     # and do some housekeeping
     viewings.clear
