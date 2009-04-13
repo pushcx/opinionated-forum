@@ -1,0 +1,22 @@
+%h1 Edit Profile
+
+- form_for(@user) do |f|
+  = f.error_messages
+
+  .fields
+    %p
+      = f.label :name
+      = f.text_field :name, :class => 'text required'
+
+    %p
+      = f.label :email
+      = f.text_field :email, :class => 'text'
+
+    - if admin?
+      %p
+        = f.label(:admin, f.check_box(:admin) + " Admin")
+
+    %p.submit
+      = f.submit "Update"
+      or
+      = link_to 'cancel', user_path(@user)

@@ -1,0 +1,14 @@
+%1 Edit Post
+
+- form_for(@post) do |f|
+  = f.error_messages
+
+  .fields
+    %p
+      = f.label :body
+      = f.text_area :body
+
+    %p.submit
+      = f.submit "Update"
+      or
+      = link_to 'cancel', topic_path(@post.topic)

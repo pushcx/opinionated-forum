@@ -29,7 +29,6 @@ There are two kinds of topics:
 
 ## TODO
 
- - replace last of erb with haml
  - Mark some tags as usable only by admins
  - Admin: option to split topics
  - Only admins should have the Admin checkbox on profile editing
