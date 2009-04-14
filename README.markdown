@@ -22,13 +22,13 @@ This is a Rails-based forum engine with some strong opinions:
 
 ## TODO
 
- - Remove 'quick' message mode, move posting inline
  - Replace Prototype with unobtrusive JavaScript (note TopicsController#new)
  - Show add/remove of tags in message flow
  - Expose post editing, acts_as_versioned the posts
  - private messaging via email
  - Set page <title> based on page contents
  - Feeds for new topics (all and by tag), new posts (all and by tag)
+ - Live preview of post response
  - Create Search page using Google Site Search
  - Admin: option to split topics
  - Mark some tags as usable only by admins

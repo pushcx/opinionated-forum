@@ -55,6 +55,9 @@
         = user_html(post.body)
     - prevpost = post
 
-  - if logged_in?
-    = render :partial => 'posts/slowreply'
-    = render :partial => 'posts/quickreply'
+- if logged_in?
+  .reply
+    - form_for(:post, :url => topic_posts_path(@topic)) do |f|
+      = f.text_area :body
+      %p.submit
+        = f.submit "Post"
