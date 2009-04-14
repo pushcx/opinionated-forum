@@ -5,6 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :topics, :collection => {:mark_all_read => :post},
                          :member => { :tag => :post, 
                                       :untag => :post,
+                                      :raw_title => :get,
                                       :update_title_of => :post } do |topic|
     topic.resources :posts
   end

@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-  before_filter :load_topic, :only => [ :show, :edit, :update_title_of, :destroy, :update_title_of ]
+  before_filter :load_topic, :only => [ :show, :edit, :raw_title, :update_title_of, :destroy, :update_title_of ]
   before_filter :require_login, :except => [ :index, :show ]
   before_filter :only_creator_or_admin, :only => [ :update_title_of ]
   before_filter :mark_topic_read, :only => [ :show ]
@@ -112,10 +112,14 @@ class TopicsController < ApplicationController
     end
   end
 
+  def raw_title
+    render :text => @topic.title
+  end
+
   def update_title_of
     @topic.title = params[:value]
     if @topic.save
-      render :text => h(@topic.title)
+      render :partial => 'title'
     end
   end
 
