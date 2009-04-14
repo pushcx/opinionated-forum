@@ -27,7 +27,6 @@ This is a Rails-based forum engine with some strong opinions:
  - private messaging via email
  - Set page <title> based on page contents
  - Feeds for new topics (all and by tag), new posts (all and by tag)
- - Live preview of post response
  - Clean up css, style flash messages
  - will_paginate topic, user indexes
  - Create Search page using Google Site Search
