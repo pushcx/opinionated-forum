@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080805222810) do
+ActiveRecord::Schema.define(:version => 20090414020620) do
 
   create_table "posts", :force => true do |t|
     t.text     "body"
@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(:version => 20080805222810) do
     t.datetime "created_at"
   end
 
-  add_index "taggings", ["taggable_id", "taggable_type"], :name => "index_taggings_on_taggable_id_and_taggable_type"
   add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type"], :name => "index_taggings_on_taggable_id_and_taggable_type"
 
   create_table "tags", :force => true do |t|
     t.string "name"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20080805222810) do
     t.string   "email"
     t.boolean  "admin"
     t.datetime "all_read_upto"
+    t.text     "profile"
   end
 
   create_table "viewings", :force => true do |t|

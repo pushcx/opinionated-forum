@@ -1,7 +1,7 @@
 Opinionated Rails Forum
 =======================
 
-This is a rails-based forum engine with some strong opinions:
+This is a Rails-based forum engine with some strong opinions:
 
  - Authentication is OpenID, creates new profile if needed
  - There are no forums/subforums
@@ -12,7 +12,8 @@ This is a rails-based forum engine with some strong opinions:
  - Avatars are gravatars
  - No smilies or sigs
  - Formatting is done with HTML
- - Posts may be edited and old versions are kept.
+ - Users enter HTML profiles, not a dozen specific fields
+ - Posts may be edited and old versions are kept, no QFT
  - Private messages are email
 
 ## Install
@@ -21,7 +22,6 @@ This is a rails-based forum engine with some strong opinions:
 
 ## TODO
 
- - Give users a text box to add their own profile info
  - Remove 'quick' message mode, move posting inline
  - Replace Prototype with unobtrusive JavaScript (note TopicsController#new)
  - Show add/remove of tags in message flow

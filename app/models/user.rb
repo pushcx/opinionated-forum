@@ -3,7 +3,7 @@
   has_many :viewings, :dependent => :delete_all
   has_many :viewed_topics, :through => :viewings, :source => :topic
 
-  attr_accessible :name, :email
+  attr_accessible :name, :email, :profile
 
   validates_presence_of :openid_url
   validates_presence_of :name

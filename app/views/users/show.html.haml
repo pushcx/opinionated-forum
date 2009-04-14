@@ -4,4 +4,12 @@
 
 #user
   %h1= h(@user.name)
+  %p
+    - if @user.admin?
+      %em Administrator
+    = @user.email.blank? ? "No e-mail address given" : "Send private message"
+
+  - unless @user.profile.blank?
+    %hr
+    = user_html @user.profile
 

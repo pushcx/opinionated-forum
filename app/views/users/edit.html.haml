@@ -16,6 +16,10 @@
       %p
         = f.label(:admin, f.check_box(:admin) + " Admin")
 
+    %p
+      = f.label :profile, "Profile (HTML ok)"
+      = f.text_area :profile
+
     %p.submit
       = f.submit "Update"
       or
