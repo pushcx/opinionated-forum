@@ -5,7 +5,6 @@
     %title Forum
     %meta{ 'http-equiv'=>"content-type", :content=>"text/html;charset=UTF-8" }
     = stylesheet_link_tag 'screen'
-    = javascript_include_tag :defaults
     = yield :feeds
   %body
     #masthead
@@ -25,3 +24,5 @@
       .flash
         = flash_messages
       = yield
+
+    = javascript_include_tag 'jquery-1.3.2.min.js', 'application'
